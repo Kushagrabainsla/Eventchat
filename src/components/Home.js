@@ -1,11 +1,11 @@
 import React from 'react';
 import './Home.css';
+import MicIcon from '@material-ui/icons/Mic';
+
 function Home() {
     return (
-        <div className='container'>
-            <div className='home'>
-                <img className="send__logo" src="assets/send_button.png" alt="" />
-            </div>
+        <div className='home'>
+            <MicIcon className='mic__icon'/>
         </div>
 
     );

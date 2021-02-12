@@ -1,4 +1,5 @@
 .container {
-  object-fit: contain;
-  height: 100vh;
+  margin: 1%;
+  display: flexbox;
+  height: 80vh;
 }
