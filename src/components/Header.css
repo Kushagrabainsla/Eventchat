@@ -1,0 +1,21 @@
+.header {
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: olivedrab;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-radius: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.header__logo1 {
+  width: 180px;
+  object-fit: contain;
+  margin-top: 10px;
+  margin-left: 10px;
+}
