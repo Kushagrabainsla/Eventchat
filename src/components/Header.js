@@ -2,6 +2,7 @@ import {React } from 'react';
 import './Header.css';
 import 'firebase/auth';
 import {auth} from '../firebase';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function Header() {
     return (
@@ -14,7 +15,9 @@ function Header() {
 
 function SignOut() {
     return auth.currentUser && (
-      <button onClick={() => auth.signOut()}>Sign Out</button>
+        <div className='signout_button'>
+            <ExitToAppIcon onClick={() => auth.signOut()} />
+        </div>
     )
 }
 

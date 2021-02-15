@@ -15,3 +15,9 @@
   object-fit: contain;
   margin-top: 1%;
 }
+
+.signout_button {
+  transform: scale(4);
+  padding-right: 3%;
+  color: #4267b2;
+}

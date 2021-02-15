@@ -22,7 +22,10 @@ function SignIn() {
     auth.signInWithPopup(provider);
   }
   return (
-    <button onClick={signInWithGoogle}>Sign in with Google</button>
+    <div className='signin_button' onClick={signInWithGoogle}>
+      <h1>Sign in with Google</h1>
+    </div>
+    /*<button className='signin_button' onClick={signInWithGoogle}>Sign in with Google</button>*/
   )
 }
 
