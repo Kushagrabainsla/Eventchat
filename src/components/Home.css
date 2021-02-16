@@ -3,7 +3,8 @@
 .home {
   height: 80%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
   background-color: #4267b2;
   z-index: 100;
@@ -13,8 +14,9 @@
 }
 
 .mic__icon {
+  margin-top: 30%;
+  margin-bottom: 10%;
   transform: scale(10);
-  place-content: center;
   background-color: #4267b2;
   border-radius: 50%;
   color: white;

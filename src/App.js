@@ -11,6 +11,7 @@ function App() {
   return (
     <div className='container'>
       <Header/>
+      <Home />
       {user ? <Home /> : <SignIn />}
     </div>
   );
@@ -25,7 +26,6 @@ function SignIn() {
     <div className='signin_button' onClick={signInWithGoogle}>
       <h1>Sign in with Google</h1>
     </div>
-    /*<button className='signin_button' onClick={signInWithGoogle}>Sign in with Google</button>*/
   )
 }
 
