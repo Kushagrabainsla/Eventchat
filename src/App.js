@@ -11,7 +11,6 @@ function App() {
   return (
     <div className='container'>
       <Header/>
-      <Home />
       {user ? <Home /> : <SignIn />}
     </div>
   );
