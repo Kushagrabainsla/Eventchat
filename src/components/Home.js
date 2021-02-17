@@ -3,7 +3,7 @@ import './Home.css';
 import firebase from 'firebase/app';
 import {db, auth} from '../firebase';
 import { ReactMic } from 'react-mic';
-/*import ReactPlayer from 'react-player'*/
+import ReactPlayer from 'react-player'
 
 import CancelIcon from '@material-ui/icons/Cancel';
 import SendIcon from '@material-ui/icons/Send';
@@ -49,7 +49,7 @@ function Home() {
 
     return (
         <div className='container'>
-            {/*<ReactPlayer className="react_player" url={blob_URL}  playing height={360} width={640}/>*/}
+            <ReactPlayer className="react_player" url={auth.currentUser.blob_URL}  playing/>
             <div className='home'>
                 <MicIcon className='mic__icon' onClick={startRecording}/>
                 <ReactMic
