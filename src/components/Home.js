@@ -49,7 +49,7 @@ function Home() {
 
     return (
         <div className='container'>
-            <ReactPlayer className="react_player" url={auth.currentUser.blob_URL}  playing/>
+            <ReactPlayer className="react_player" url={auth.currentUser.blob_URL}  playing={true}/>
             <div className='home'>
                 <MicIcon className='mic__icon' onClick={startRecording}/>
                 <ReactMic
