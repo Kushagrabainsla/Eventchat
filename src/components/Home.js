@@ -1,34 +1,61 @@
-import React from 'react';
+import {React, useState} from 'react';
 import './Home.css';
-import {Record} from './Record';
 /*import ReactPlayer from 'react-player'*/
 import firebase from 'firebase/app';
 import CancelIcon from '@material-ui/icons/Cancel';
 import SendIcon from '@material-ui/icons/Send';
 import MicIcon from '@material-ui/icons/Mic';
 import {db, auth} from '../firebase';
+import { ReactMic } from 'react-mic';
+import StopIcon from '@material-ui/icons/Stop';
 
 function Home() {
 
     const messagesRef = db.collection('audio_files');
+    const [state, setState] = useState({record: false});
 
     const sendMessage = async(e) => {
         e.preventDefault();
         const { uid, photoURL } = auth.currentUser;
         await messagesRef.add({
-          blob_URL: 'URL_value',
+          blob_URL: 'yay',
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           photoURL,
           uid
         })
         console.log('Recording sent to firebase')
     }
+
+    function startRecording() {
+        setState({ record: true });
+    }
+  
+    function stopRecording() {
+        setState({ record: false });
+    }
+  
+    function onData(recordedBlob) {
+        console.log('chunk of real-time data is: ', recordedBlob);
+    }
+  
+    function onStop(recordedBlob) {
+        console.log('recordedBlob is: ', recordedBlob);
+    }
+
     return (
         <div className='container'>
             {/*<ReactPlayer className="react_player" url={blob_URL}  playing height={360} width={640}/>*/}
             <div className='home'>
-                <MicIcon className='mic__icon'/>
-                <Record />
+                <MicIcon className='mic__icon' onClick={startRecording}/>
+                <ReactMic
+                    record={state.record}
+                    className="sound-wave"
+                    onStop={onStop}
+                    onData={onData}
+                    strokeColor="white"
+                    backgroundColor="#4267b2" 
+                />
+                <StopIcon className="stop_button" onClick={stopRecording}/>
             </div>
 
             <div className="bottom">

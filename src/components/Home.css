@@ -38,3 +38,11 @@
   color: white;
   margin: 8%;
 }
+
+.stop_button {
+  margin-top: 1%;
+  transform: scale(7);
+  background-color: #4267b2;
+  border-radius: 50%;
+  color: white;
+}
