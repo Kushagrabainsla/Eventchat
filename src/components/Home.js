@@ -1,24 +1,28 @@
 import {React, useState} from 'react';
 import './Home.css';
-/*import ReactPlayer from 'react-player'*/
 import firebase from 'firebase/app';
+import {db, auth} from '../firebase';
+import { ReactMic } from 'react-mic';
+/*import ReactPlayer from 'react-player'*/
+
 import CancelIcon from '@material-ui/icons/Cancel';
 import SendIcon from '@material-ui/icons/Send';
 import MicIcon from '@material-ui/icons/Mic';
-import {db, auth} from '../firebase';
-import { ReactMic } from 'react-mic';
 import StopIcon from '@material-ui/icons/Stop';
+
 
 function Home() {
 
     const messagesRef = db.collection('audio_files');
     const [state, setState] = useState({record: false});
+    const [blob, setBlob] = useState({blob_url: ''});
 
     const sendMessage = async(e) => {
         e.preventDefault();
         const { uid, photoURL } = auth.currentUser;
+        const blob_url = blob.blob_url;
         await messagesRef.add({
-          blob_URL: 'yay',
+          blob_URL: blob_url,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           photoURL,
           uid
@@ -39,6 +43,7 @@ function Home() {
     }
   
     function onStop(recordedBlob) {
+        setBlob({ blob_url: recordedBlob.blobURL });
         console.log('recordedBlob is: ', recordedBlob);
     }
 
