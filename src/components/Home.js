@@ -12,8 +12,9 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 function Home() {
 
     const messagesRef = db.collection('audio_files');
-    const [state, setState] = useState({record: false});
-    const [blob, setBlob] = useState({blob_url: ''});
+    const [state, setState] = useState({ record: false });
+    const [blob, setBlob] = useState({ blob_url: '' });
+    const [audio, setAudio] = useState({ audio: false });
 
     const sendMessage = async(e) => {
         e.preventDefault();
@@ -30,10 +31,13 @@ function Home() {
 
     function startRecording() {
         setState({ record: true });
+        setAudio({ audio: true });
     }
   
     function stopRecording() {
         setState({ record: false });
+        setAudio({ audio: false });
+        console.log('audio.audio', audio.audio);
     }
   
     function onData(recordedBlob) {
@@ -48,7 +52,6 @@ function Home() {
         console.log('Audio playing....')
         var audio = new Audio(blob.blob_url);
         audio.play();
-        console.log('Audio played');
     }
 
     return (
@@ -63,7 +66,7 @@ function Home() {
                     strokeColor="white"
                     backgroundColor="#4267b2" 
                 />
-                <StopIcon className="stop_button" onClick={stopRecording}/>
+                <StopIcon className={ audio.audio ? "stop_button_visible" : "stop_button_hidden"} onClick={stopRecording}/>
             </div>
             <div className="bottom">
                 <PlayArrowIcon className="bottom__logo1" onClick={playAudio}/>
