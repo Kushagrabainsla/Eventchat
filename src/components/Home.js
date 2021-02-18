@@ -44,11 +44,12 @@ function Home() {
         setBlob({ blob_url: recordedBlob.blobURL });
         console.log('recordedBlob is: ', recordedBlob);
     }
-
     function playAudio() {
-        const audioEl = document.getElementsByClassName("audio-element")[0]
-        audioEl.play()
-      }
+        console.log('Audio playing....')
+        var audio = new Audio(blob.blob_url);
+        audio.play();
+        console.log('Audio played');
+    }
 
     return (
         <div className='container'>
@@ -64,12 +65,8 @@ function Home() {
                 />
                 <StopIcon className="stop_button" onClick={stopRecording}/>
             </div>
-
             <div className="bottom">
                 <PlayArrowIcon className="bottom__logo1" onClick={playAudio}/>
-                <audio className='audio-element'>
-                    <source src={auth.currentUser.blob_URL}></source>
-                </audio>
                 <SendIcon className="bottom__logo1" onClick={sendMessage} />
             </div>
         </div>
