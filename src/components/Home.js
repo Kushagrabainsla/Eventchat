@@ -4,11 +4,10 @@ import firebase from 'firebase/app';
 import {db, auth} from '../firebase';
 import { ReactMic } from 'react-mic';
 
-import CancelIcon from '@material-ui/icons/Cancel';
 import SendIcon from '@material-ui/icons/Send';
 import MicIcon from '@material-ui/icons/Mic';
 import StopIcon from '@material-ui/icons/Stop';
-
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 function Home() {
 
@@ -46,6 +45,11 @@ function Home() {
         console.log('recordedBlob is: ', recordedBlob);
     }
 
+    function playAudio() {
+        const audioEl = document.getElementsByClassName("audio-element")[0]
+        audioEl.play()
+      }
+
     return (
         <div className='container'>
             <div className='home'>
@@ -62,7 +66,10 @@ function Home() {
             </div>
 
             <div className="bottom">
-                <CancelIcon className="bottom__logo1"/>
+                <PlayArrowIcon className="bottom__logo1" onClick={playAudio}/>
+                <audio className='audio-element'>
+                    <source src={blob.blob_url}></source>
+                </audio>
                 <SendIcon className="bottom__logo1" onClick={sendMessage} />
             </div>
         </div>
