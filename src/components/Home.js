@@ -68,7 +68,7 @@ function Home() {
             <div className="bottom">
                 <PlayArrowIcon className="bottom__logo1" onClick={playAudio}/>
                 <audio className='audio-element'>
-                    <source src={blob.blob_url}></source>
+                    <source src={auth.currentUser.blob_URL}></source>
                 </audio>
                 <SendIcon className="bottom__logo1" onClick={sendMessage} />
             </div>
