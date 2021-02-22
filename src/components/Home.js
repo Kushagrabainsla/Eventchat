@@ -18,9 +18,11 @@ function Home() {
 
     const sendMessage = async(e) => {
         e.preventDefault();
-        const { uid, photoURL } = auth.currentUser;
+        const { displayName, email, uid, photoURL } = auth.currentUser;
         const blob_url = blob.blob_url;
         await messagesRef.add({
+          displayName,
+          email,
           blob_URL: blob_url,
           createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           photoURL,
