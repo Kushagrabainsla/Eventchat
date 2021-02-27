@@ -15,11 +15,22 @@ function Home() {
     const [state, setState] = useState({ record: false });
     const [blob, setBlob] = useState({ blob_url: '' });
     const [audio, setAudio] = useState({ audio: false });
+    var storageRef = firebase.storage().ref();
 
     const sendMessage = async(e) => {
         e.preventDefault();
         const { displayName, email, uid, photoURL } = auth.currentUser;
         const blob_url = blob.blob_url;
+
+        var recent_audio = new Audio(blob_url);
+        var metadata = { contentType: 'audio/mp3', };
+        const path = 'audios/'.concat( uid,'.mp3');
+        storageRef.child(path).put(recent_audio, metadata).then((snapshot) => {
+            console.log('Uploaded the audio file!');
+            const uri = storageRef.child(path).getDownloadURL();
+            console.log("uri:", uri);
+          });
+
         await messagesRef.add({
           displayName,
           email,
