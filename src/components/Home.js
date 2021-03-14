@@ -17,19 +17,43 @@ function Home() {
     const [audio, setAudio] = useState({ audio: false });
     var storageRef = firebase.storage().ref();
 
+
+
+
     const sendMessage = async(e) => {
         e.preventDefault();
         const { displayName, email, uid, photoURL } = auth.currentUser;
-        const blob_url = blob.blob_url;
 
-        var recent_audio = new Audio(blob_url);
-        var metadata = { contentType: 'audio/mp3', };
-        const path = 'audios/'.concat( uid,'.mp3');
+        const blob_url = blob.blob_url;
+        console.log("🌜",blob_url)
+
+
+        function downloadBlob(blob, name) {
+            const link = document.createElement("a");
+            link.href = blob;
+            link.download = name;
+            document.body.appendChild(link);
+          
+            link.dispatchEvent(
+              new MouseEvent('click', { 
+                bubbles: true, 
+                cancelable: true, 
+                view: window 
+              })
+            );
+            document.body.removeChild(link);
+          }
+
+        downloadBlob(blob_url, String(uid)+ '.webm');
+
+        var recent_audio = new Audio();
+        var metadata = { contentType: 'audio/webm', };
+        const path = 'audios/'.concat( uid,'.webm');
         storageRef.child(path).put(recent_audio, metadata).then((snapshot) => {
-            console.log('Uploaded the audio file!');
-            const uri = storageRef.child(path).getDownloadURL();
-            console.log("uri:", uri);
-          });
+            console.log('Uploaded the audio file!', snapshot);
+            // const uri = storageRef.child(path).getDownloadURL();
+            // console.log("uri:", uri);
+        });
 
         await messagesRef.add({
           displayName,
@@ -50,7 +74,6 @@ function Home() {
     function stopRecording() {
         setState({ record: false });
         setAudio({ audio: false });
-        console.log('audio.audio', audio.audio);
     }
   
     function onData(recordedBlob) {
@@ -61,8 +84,9 @@ function Home() {
         setBlob({ blob_url: recordedBlob.blobURL });
         console.log('recordedBlob is: ', recordedBlob);
     }
+
     function playAudio() {
-        console.log('Audio playing....')
+        console.log('Audio playing....');
         var audio = new Audio(blob.blob_url);
         audio.play();
     }
@@ -78,6 +102,7 @@ function Home() {
                     onData={onData}
                     strokeColor="white"
                     backgroundColor="#4267b2" 
+                    mimeType='audio/mp3'
                 />
                 <StopIcon className={ audio.audio ? "stop_button_visible" : "stop_button_hidden"} onClick={stopRecording}/>
             </div>
